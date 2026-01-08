@@ -4,9 +4,9 @@
  * Business logic is included directly in this controller
  */
 
-const Weight = require('../models/weight.model');
-const { DailyTotals } = require('../models/log.model');
-const Profile = require('../models/profile.model');
+const Weight = require('../models/weightModel');
+const { DailyTotals } = require('../models/logModel');
+const Profile = require('../models/profileModel');
 
 // ==================== Helper Functions ====================
 

@@ -6,9 +6,9 @@
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user.model');
-const Profile = require('../models/profile.model');
-const appConfig = require('../config/app.config');
+const User = require('../models/userModel');
+const Profile = require('../models/profileModel');
+const appConfig = require('../config/appConfig');
 
 // ==================== Helper Functions ====================
 
@@ -336,9 +336,9 @@ const AuthController = {
             await Profile.deleteOne({ userId: req.params.id });
 
             // Import models for cleanup
-            const Plan = require('../models/plan.model');
-            const Log = require('../models/log.model');
-            const Weight = require('../models/weight.model');
+            const Plan = require('../models/planModel');
+            const Log = require('../models/logModel');
+            const Weight = require('../models/weightModel');
 
             await Plan.deleteMany({ userId: req.params.id });
             await Log.deleteMany({ userId: req.params.id });

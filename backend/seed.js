@@ -10,9 +10,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 // Import models
-const User = require('./models/user.model');
-const Food = require('./models/food.model');
-const Profile = require('./models/profile.model');
+const User = require('./models/userModel');
+const Food = require('./models/foodModel');
+const Profile = require('./models/profileModel');
 
 // Sample foods data
 const sampleFoods = [

@@ -5,8 +5,8 @@
 
 const express = require('express');
 const router = express.Router();
-const { LogController, TotalsController } = require('../controllers/log.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const { LogController, TotalsController } = require('../controllers/logController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // All routes require authentication
 router.use(authMiddleware);

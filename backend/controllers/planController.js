@@ -4,9 +4,9 @@
  * Business logic is included directly in this controller
  */
 
-const Plan = require('../models/plan.model');
-const Food = require('../models/food.model');
-const Profile = require('../models/profile.model');
+const Plan = require('../models/planModel');
+const Food = require('../models/foodModel');
+const Profile = require('../models/profileModel');
 
 // ==================== Helper Functions ====================
 

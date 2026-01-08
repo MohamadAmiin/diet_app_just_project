@@ -7,13 +7,13 @@
 
 const express = require('express');
 const cors = require('cors');
-const appConfig = require('./config/app.config');
+const appConfig = require('./config/appConfig');
 
 // Import routes
-const authRoutes = require('./routes/auth.routes');
-const planRoutes = require('./routes/plan.routes');
-const logRoutes = require('./routes/log.routes');
-const progressRoutes = require('./routes/progress.routes');
+const authRoutes = require('./routes/authRoutes');
+const planRoutes = require('./routes/planRoutes');
+const logRoutes = require('./routes/logRoutes');
+const progressRoutes = require('./routes/progressRoutes');
 
 // Initialize Express app
 const app = express();

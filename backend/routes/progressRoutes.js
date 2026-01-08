@@ -5,8 +5,8 @@
 
 const express = require('express');
 const router = express.Router();
-const { WeightController, ProgressController } = require('../controllers/progress.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
+const { WeightController, ProgressController } = require('../controllers/progressController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // All routes require authentication
 router.use(authMiddleware);

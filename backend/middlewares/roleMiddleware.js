@@ -3,7 +3,7 @@
  * Handles Role-Based Access Control (RBAC)
  */
 
-const appConfig = require('../config/app.config');
+const appConfig = require('../config/appConfig');
 
 /**
  * Middleware factory that checks if user has required role(s)

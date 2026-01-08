@@ -1,7 +1,7 @@
 {
   "name": "diet-management-system",
   "version": "1.0.0",
-  "description": "A basic Diet Management System for university backend-focused project",
+  "description": "A Diet Management System backend built with Node.js, Express, and MongoDB",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -5,9 +5,9 @@
 
 const express = require('express');
 const router = express.Router();
-const { AuthController, ProfileController } = require('../controllers/auth.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
-const { isAdmin } = require('../middlewares/role.middleware');
+const { AuthController, ProfileController } = require('../controllers/authController');
+const authMiddleware = require('../middlewares/authMiddleware');
+const { isAdmin } = require('../middlewares/roleMiddleware');
 
 // ==================== Public Routes ====================
 

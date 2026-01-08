@@ -4,8 +4,8 @@
  * Business logic is included directly in this controller
  */
 
-const { MealLog, DailyTotals } = require('../models/log.model');
-const Food = require('../models/food.model');
+const { MealLog, DailyTotals } = require('../models/logModel');
+const Food = require('../models/foodModel');
 
 // ==================== Helper Functions ====================
 

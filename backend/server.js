@@ -9,8 +9,8 @@
 require('dotenv').config();
 
 const app = require('./app');
-const connectDB = require('./config/db.config');
-const appConfig = require('./config/app.config');
+const connectDB = require('./config/dbConfig');
+const appConfig = require('./config/appConfig');
 
 const PORT = appConfig.server.port;
 

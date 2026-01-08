@@ -5,9 +5,9 @@
 
 const express = require('express');
 const router = express.Router();
-const { PlanController, FoodController } = require('../controllers/plan.controller');
-const authMiddleware = require('../middlewares/auth.middleware');
-const { isAdmin } = require('../middlewares/role.middleware');
+const { PlanController, FoodController } = require('../controllers/planController');
+const authMiddleware = require('../middlewares/authMiddleware');
+const { isAdmin } = require('../middlewares/roleMiddleware');
 
 // ==================== Food Routes ====================
 
