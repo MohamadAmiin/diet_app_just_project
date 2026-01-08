@@ -27,5 +27,8 @@ router.put('/profile', authMiddleware, ProfileController.updateProfile);
 // ==================== Admin Routes ====================
 
 router.get('/users', authMiddleware, isAdmin, AuthController.getAllUsers);
+router.get('/users/:id', authMiddleware, isAdmin, AuthController.getUserById);
+router.put('/users/:id', authMiddleware, isAdmin, AuthController.updateUser);
+router.delete('/users/:id', authMiddleware, isAdmin, AuthController.deleteUser);
 
 module.exports = router;

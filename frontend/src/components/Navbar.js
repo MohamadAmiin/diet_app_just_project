@@ -27,7 +27,12 @@ const Navbar = () => {
                         <Link to="/logs">Meal Logs</Link>
                         <Link to="/progress">Progress</Link>
                         <Link to="/profile">Profile</Link>
-                        {isAdmin && <Link to="/foods">Foods (Admin)</Link>}
+                        {isAdmin && (
+                            <>
+                                <Link to="/foods">Foods (Admin)</Link>
+                                <Link to="/users">Users (Admin)</Link>
+                            </>
+                        )}
                     </>
                 )}
             </div>

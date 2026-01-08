@@ -12,6 +12,7 @@ const bcrypt = require('bcryptjs');
 // Import models
 const User = require('./models/user.model');
 const Food = require('./models/food.model');
+const Profile = require('./models/profile.model');
 
 // Sample foods data
 const sampleFoods = [
@@ -107,14 +108,40 @@ const seedDatabase = async () => {
             const hashedPassword = await bcrypt.hash(adminUser.password, salt);
 
             admin = await User.create({
-                ...adminUser,
-                password: hashedPassword
+                email: adminUser.email,
+                password: hashedPassword,
+                role: adminUser.role
             });
-            console.log('Created admin user');
+
+            // Create profile for admin
+            await Profile.create({
+                userId: admin._id,
+                age: adminUser.age,
+                height: adminUser.height,
+                weight: adminUser.weight,
+                goal: adminUser.goal,
+                dailyCalorieTarget: adminUser.dailyCalorieTarget
+            });
+
+            console.log('Created admin user with profile');
             console.log('  Email:', adminUser.email);
             console.log('  Password:', adminUser.password);
         } else {
-            console.log('Admin user already exists');
+            // Ensure admin has a profile
+            let adminProfile = await Profile.findOne({ userId: admin._id });
+            if (!adminProfile) {
+                await Profile.create({
+                    userId: admin._id,
+                    age: adminUser.age,
+                    height: adminUser.height,
+                    weight: adminUser.weight,
+                    goal: adminUser.goal,
+                    dailyCalorieTarget: adminUser.dailyCalorieTarget
+                });
+                console.log('Created profile for existing admin user');
+            } else {
+                console.log('Admin user already exists with profile');
+            }
         }
 
         console.log('\n✅ Database seeded successfully!');

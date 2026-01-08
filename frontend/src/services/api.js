@@ -50,7 +50,11 @@ export const authAPI = {
     getProfile: () => api.get('/auth/profile'),
     updateProfile: (data) => api.put('/auth/profile', data),
     changePassword: (data) => api.put('/auth/change-password', data),
-    getAllUsers: () => api.get('/auth/users')
+    // Admin user management
+    getAllUsers: () => api.get('/auth/users'),
+    getUserById: (id) => api.get(`/auth/users/${id}`),
+    updateUser: (id, data) => api.put(`/auth/users/${id}`, data),
+    deleteUser: (id) => api.delete(`/auth/users/${id}`)
 };
 
 // ==================== Foods API ====================

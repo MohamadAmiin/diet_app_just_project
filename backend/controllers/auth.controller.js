@@ -212,6 +212,155 @@ const AuthController = {
     },
 
     /**
+     * Get single user by ID (admin only)
+     * GET /api/auth/users/:id
+     */
+    async getUserById(req, res) {
+        try {
+            const user = await User.findById(req.params.id).select('-password');
+
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+
+            // Get user's profile
+            const profile = await Profile.findOne({ userId: user._id });
+
+            res.status(200).json({
+                success: true,
+                data: {
+                    ...user.toObject(),
+                    profile
+                }
+            });
+
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+    },
+
+    /**
+     * Update user (admin only)
+     * PUT /api/auth/users/:id
+     */
+    async updateUser(req, res) {
+        try {
+            const { email, role, age, height, weight, goal, dailyCalorieTarget } = req.body;
+
+            // Prevent admin from demoting themselves
+            if (req.params.id === req.user._id.toString() && role && role !== 'admin') {
+                return res.status(400).json({
+                    success: false,
+                    message: 'You cannot change your own role'
+                });
+            }
+
+            // Update user
+            const userUpdate = {};
+            if (email) userUpdate.email = email;
+            if (role) userUpdate.role = role;
+
+            const user = await User.findByIdAndUpdate(
+                req.params.id,
+                { $set: userUpdate },
+                { new: true, runValidators: true }
+            ).select('-password');
+
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+
+            // Update profile if profile fields provided
+            const profileUpdate = {};
+            if (age !== undefined) profileUpdate.age = age;
+            if (height !== undefined) profileUpdate.height = height;
+            if (weight !== undefined) profileUpdate.weight = weight;
+            if (goal !== undefined) profileUpdate.goal = goal;
+            if (dailyCalorieTarget !== undefined) profileUpdate.dailyCalorieTarget = dailyCalorieTarget;
+
+            if (Object.keys(profileUpdate).length > 0) {
+                await Profile.findOneAndUpdate(
+                    { userId: req.params.id },
+                    { $set: profileUpdate },
+                    { new: true, upsert: true }
+                );
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'User updated successfully',
+                data: user
+            });
+
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            });
+        }
+    },
+
+    /**
+     * Delete user (admin only)
+     * DELETE /api/auth/users/:id
+     */
+    async deleteUser(req, res) {
+        try {
+            // Prevent admin from deleting themselves
+            if (req.params.id === req.user._id.toString()) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'You cannot delete your own account'
+                });
+            }
+
+            const user = await User.findById(req.params.id);
+
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+
+            // Delete user's related data
+            await Profile.deleteOne({ userId: req.params.id });
+
+            // Import models for cleanup
+            const Plan = require('../models/plan.model');
+            const Log = require('../models/log.model');
+            const Weight = require('../models/weight.model');
+
+            await Plan.deleteMany({ userId: req.params.id });
+            await Log.deleteMany({ userId: req.params.id });
+            await Weight.deleteMany({ userId: req.params.id });
+
+            // Delete user
+            await User.findByIdAndDelete(req.params.id);
+
+            res.status(200).json({
+                success: true,
+                message: 'User and all related data deleted successfully'
+            });
+
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+    },
+
+    /**
      * Change password
      * PUT /api/auth/change-password
      */

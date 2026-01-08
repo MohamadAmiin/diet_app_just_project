@@ -18,6 +18,7 @@ import Plans from './pages/Plans';
 import Logs from './pages/Logs';
 import Progress from './pages/Progress';
 import Foods from './pages/Foods';
+import Users from './pages/Users';
 
 // Home component - redirects based on auth status
 const Home = () => {
@@ -95,6 +96,14 @@ function App() {
                                 element={
                                     <ProtectedRoute adminOnly>
                                         <Foods />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/users"
+                                element={
+                                    <ProtectedRoute adminOnly>
+                                        <Users />
                                     </ProtectedRoute>
                                 }
                             />
