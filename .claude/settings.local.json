@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(node -c:*)",
+      "Bash(node:*)",
+      "Bash(npm run seed:*)"
+    ]
+  }
+}
