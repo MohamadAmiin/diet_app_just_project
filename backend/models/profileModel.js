@@ -1,3 +1,4 @@
+
 /**
  * Profile Model
  * Stores user profile information (age, height, weight, goal)
