@@ -1,3 +1,4 @@
+
 /**
  * Log Model
  * Stores meal logs and daily totals
