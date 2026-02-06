@@ -1,3 +1,4 @@
+
 /**
  * User Model
  * Stores user authentication information
