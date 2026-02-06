@@ -1,3 +1,4 @@
+
 /**
  * Weight Model
  * Tracks user weight over time for progress monitoring
